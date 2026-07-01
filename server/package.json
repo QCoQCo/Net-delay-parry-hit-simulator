@@ -1,0 +1,13 @@
+{
+  "name": "netcode-lab-server",
+  "version": "1.0.0",
+  "description": "Minimal 2-client WebSocket relay for the netcode lab",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

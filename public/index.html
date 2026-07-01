@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Netcode Lab · 딜레이 vs 롤백 넷코드 실험실</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Netcode Lab</h1>
+    <p class="subtitle">1D 패링/타격 시뮬레이터 — 딜레이 넷코드 vs 롤백 넷코드</p>
+  </header>
+
+  <main>
+    <section class="panel controls">
+      <div class="control-group">
+        <label>연결 방식</label>
+        <select id="connection-mode">
+          <option value="loopback">가상 피어 시뮬레이션 (한 탭)</option>
+          <option value="websocket">실제 WebSocket (두 클라이언트)</option>
+        </select>
+      </div>
+
+      <div id="ws-panel" class="control-group" style="display:none">
+        <label>서버 주소</label>
+        <div class="row">
+          <input id="ws-url" type="text" value="ws://localhost:8080" />
+          <button id="ws-connect">연결</button>
+        </div>
+        <p id="ws-status" class="status-text"></p>
+      </div>
+
+      <div class="control-group">
+        <label>넷코드 모드</label>
+        <select id="netcode-mode">
+          <option value="delay">딜레이 넷코드 (Delay)</option>
+          <option value="rollback">롤백 넷코드 (Rollback)</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>가상 네트워크 시뮬레이터</label>
+        <div class="slider-row">
+          <span>지연 (Latency)</span>
+          <input id="latency" type="range" min="0" max="300" value="100" step="5" />
+          <span id="latency-val" class="val">100ms</span>
+        </div>
+        <div class="slider-row">
+          <span>지터 (Jitter)</span>
+          <input id="jitter" type="range" min="0" max="150" value="0" step="5" />
+          <span id="jitter-val" class="val">0ms</span>
+        </div>
+        <div class="slider-row">
+          <span>패킷 손실 (Loss)</span>
+          <input id="loss" type="range" min="0" max="50" value="0" step="1" />
+          <span id="loss-val" class="val">0%</span>
+        </div>
+      </div>
+
+      <button id="restart" class="restart-btn">다시 시작</button>
+
+      <p id="instructions" class="instructions"></p>
+    </section>
+
+    <section class="stage-area">
+      <div class="canvas-wrap">
+        <canvas id="canvas-p1" width="800" height="220"></canvas>
+      </div>
+      <div class="canvas-wrap" id="canvas-p2-wrap">
+        <canvas id="canvas-p2" width="800" height="220"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
